@@ -18,7 +18,7 @@ function sendJokes() {
   let joker = $('#whosejokeIn').val();
   let joke = $('#questionIn').val();
   let punch = $('#punchlineIn').val();
-
+  let funny = $('#funninessIn').val();
   let joketoSend = new joke(Joker, joke, punch);
   $.ajax({
     type: 'POST',
@@ -28,6 +28,7 @@ function sendJokes() {
       let joker = $('#whosejokeIn').val('');
       let joke = $('#questionIn').val('');
       let punch = $('#punchlineIn').val('');
+      let funniness = new Number( $('#funninessIn').val(''); )
       //display
       getjokes();
     },
@@ -36,6 +37,7 @@ function sendJokes() {
     }
   })
 }
+//grabs jokes from the router/server
   function getJokes() {
       $.ajax({
           method: 'GET',
@@ -45,8 +47,19 @@ function sendJokes() {
               $('#outputDiv').empty();
               for (let i=0; i < response.length; i++) {
                   const joke = response[i];
-                  $('#outputDiv').prepend('<div class="joke-block"><p class="joke-whosejoke">' + joke.whosejoke + '</p><p class="joke-question">' + joke.jokequestion + '</p><p class="joke-punchline">' + joke.punchline + '</p></div>');
+                  $('#outputDiv').prepend('<div class="joke-block"><p class="joke-whosejoke">' + joke.whosejoke + '</p><p class="joke-question">' + joke.jokequestion + '</p><p class="joke-punchline">' + joke.punchline + '</p><p class="joke-funniness">' + joke.funniness'</p></div>');
               }
+          }
+      });
+  }
+  //delete jokes
+  function deleteJoke(id){
+      $.ajax({
+          method: 'DELETE',
+          url: '/jokes/' + id,
+          success: function(response) {
+              console.log('delete joke: ', response);
+              getJokes();
           }
       });
   }
