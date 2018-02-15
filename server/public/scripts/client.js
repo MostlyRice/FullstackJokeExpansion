@@ -1,10 +1,10 @@
 console.log('client.js sourced');
 
 class joke {
-  constructor(whoseJoke, questionIn, punchLine){
-    this.whoseJoke = whoseJoke;
+  constructor(whosejoke, questionIn, punchline){
+    this.whosejoke = whosejoke;
     This.questionIn= questionIn;
-    this.punchLine= punchLine;
+    this.punchline= punchline;
   }
 }
 $(onReady);
@@ -15,7 +15,7 @@ function onReady(){
   $('#addjokebutton').on('click', sendJokes);
 }
 function sendJokes() {
-  let joker = $('#whoseJokeIn').val();
+  let joker = $('#whosejokeIn').val();
   let joke = $('#questionIn').val();
   let punch = $('#punchlineIn').val();
 
@@ -25,7 +25,7 @@ function sendJokes() {
     url: '/jokes',
     success: function(response) {
       console.log("success on jokes GET!", result)
-      let joker = $('#whoseJokeIn').val('');
+      let joker = $('#whosejokeIn').val('');
       let joke = $('#questionIn').val('');
       let punch = $('#punchlineIn').val('');
       //display
@@ -36,17 +36,16 @@ function sendJokes() {
     }
   })
 }
-
   function getJokes() {
       $.ajax({
           method: 'GET',
           url: '/jokes',
           success: function(response) {
+            console.log(response);
               $('#outputDiv').empty();
-
               for (let i=0; i < response.length; i++) {
                   const joke = response[i];
-                  $('#outputDiv').prepend('<div class="joke-block"><p class="joke-whoseJoke">' + joke.whoseJoke + '</p><p class="joke-question">' + joke.jokeQuestion + '</p><p class="joke-punchLine">' + joke.punchLine + '</p></div>');
+                  $('#outputDiv').prepend('<div class="joke-block"><p class="joke-whosejoke">' + joke.whosejoke + '</p><p class="joke-question">' + joke.jokequestion + '</p><p class="joke-punchline">' + joke.punchline + '</p></div>');
               }
           }
       });
